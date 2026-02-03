@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: postikumhighload
+spec:
+  rules:
+    - host: postikumhighload.local
+      http:
+        paths:
+          - path: /ingest
+            pathType: Prefix
+            backend:
+              service:
+                name: postikumhighload
+                port:
+                  number: 80
+          - path: /analyze
+            pathType: Prefix
+            backend:
+              service:
+                name: postikumhighload
+                port:
+                  number: 80
+          - path: /metrics
+            pathType: Prefix
+            backend:
+              service:
+                name: postikumhighload
+                port:
+                  number: 80

@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: postikumhighload
+  labels:
+    release: mon
+spec:
+  selector:
+    matchLabels:
+      app: postikumhighload
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 10s

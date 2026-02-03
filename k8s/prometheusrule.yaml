@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: postikumhighload-alerts
+  labels:
+    release: mon
+spec:
+  groups:
+    - name: postikumhighload.rules
+      rules:
+        - alert: PostikumHighloadHighAnomalyRate
+          expr: rate(postikum_anomalies_total[1m]) > 5
+          for: 1m
+          labels:
+            severity: warning
+          annotations:
+            summary: "High anomaly rate in PostikumHighload"
+            description: "Anomaly rate exceeds 5 per minute"
